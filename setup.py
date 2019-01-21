@@ -52,6 +52,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Software Development',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
@@ -61,6 +62,7 @@ setup(
     use_2to3=False,
     python_requires='>=3.6',
     packages=find_packages(exclude=['*test*', 'pylintcheckers']),
-    requires=[
+    install_requires=[
+        'dewi_module_framework>=2.0.1'
     ]
 )
