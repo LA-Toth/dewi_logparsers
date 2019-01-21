@@ -32,7 +32,7 @@ setup(
     name="dewi_logparsers",
     description="DEWI Logparser Module Framework: process / analyze syslog files",
     license="LGPLv3",
-    version="1.5",
+    version="2.0",
     author="Laszlo Attila Toth",
     author_email="python-dewi@laszloattilatoth.me",
     maintainer="Laszlo Attila Toth",
@@ -60,7 +60,7 @@ setup(
     zip_safe=True,
     use_2to3=False,
     python_requires='>=3.6',
-    packages=find_packages(exclude=['*test*']),
+    packages=find_packages(exclude=['*test*', 'pylintcheckers']),
     requires=[
     ]
 )
