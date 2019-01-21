@@ -32,7 +32,7 @@ setup(
     name="dewi_logparsers",
     description="DEWI Logparser Module Framework: process / analyze syslog files",
     license="LGPLv3",
-    version="2.0",
+    version="2.0.1",
     author="Laszlo Attila Toth",
     author_email="python-dewi@laszloattilatoth.me",
     maintainer="Laszlo Attila Toth",

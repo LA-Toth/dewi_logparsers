@@ -1,3 +1,7 @@
+2.0.1
+  - add Python 3.7 to setup.py and fix package dependencies
+  - start using semantic versioning
+
 2.0
   - !!! DEWI goes into multiple repositories and packages
   - use only 'protected' members with single leading underscore ('_')
