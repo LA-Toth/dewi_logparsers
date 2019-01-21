@@ -8,11 +8,9 @@ help:
 	@echo "cs               --- run coding standards checks"
 	@echo "pylint           --- run pylint checks only"
 	@echo "pep8             --- run pep8 checks only"
-	@echo "features         --- run behave scenarios without @wip tag"
-	@echo "features-wip     --- run behave scenarios with @wip tag"
 
 .PHONY: check
-check: cs tests features
+check: cs tests
 
 .PHONY: tests
 tests:
@@ -54,13 +52,3 @@ codestyle:
 
 .PHONY: pep8
 pep8: codestyle
-
-.PHONY: features
-features:
-	@echo Running feature specifications - non-wip scenarios
-	PYTHONPATH=features:$(PYTHONPATH) $(BEHAVE) --tags=-wip
-
-.PHONY: features-wip
-features-wip:
-	@echo Running feature specifications - wip scenarios
-	PYTHONPATH=features:$(PYTHONPATH) $(BEHAVE) --tags=wip
