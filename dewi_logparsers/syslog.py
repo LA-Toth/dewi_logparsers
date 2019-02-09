@@ -63,7 +63,11 @@ class ISO8601Parser(Parser):
 class GenericParser(Parser):
     def __init__(self):
         self._date_time_pattern = re.compile(
-            r'^([A-Za-z]+ [0-9]+ )'
+            r'^([A-Za-z]+ +[0-9]+ )'
+        )
+
+        self._any_date_time_pattern = re.compile(
+            r'^(?P<date>.*)'
         )
 
     def parse_date(self, line: str) -> typing.Optional[typing.Match[str]]:
@@ -73,7 +77,8 @@ class GenericParser(Parser):
 
         time_struct = time.strptime(matched.group(1) + time.strftime('%Y'), '%b %d %Y')
 
-        return f'{time_struct.tm_year}-{time_struct.tm_mon:02d}-{time_struct.tm_mday:02d}'
+        d = f'{time_struct.tm_year}-{time_struct.tm_mon:02d}-{time_struct.tm_mday:02d}'
+        return self._any_date_time_pattern.match(d)
 
     def parse(self, line: str) -> typing.Optional[typing.Match[str]]:
         pass

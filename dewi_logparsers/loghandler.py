@@ -90,7 +90,7 @@ class LogFileDefinition:
 
 class GenericLogFileDefinition(LogFileDefinition):
     def __init__(self):
-        super().__init__(['/var/log'], r'^(syslog|system.log|messages)', GenericParser())
+        super().__init__(['/var/log'], r'^(syslog|system.log|messages)$', GenericParser())
 
 
 class LogHandlerModule(Module):
