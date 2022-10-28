@@ -1,10 +1,10 @@
-# Copyright 2016-2019 Laszlo Attila Toth
+# Copyright 2016-2022 Laszlo Attila Toth
 # Distributed under the terms of the GNU Lesser General Public License v3
 
 import os
 import re
 import time
-import typing
+from typing import Union
 
 from dewi_core.config.config import Config
 from dewi_logparsers.syslog import GenericParser, Parser
@@ -13,7 +13,7 @@ from dewi_module_framework.module import GenericModule, Module
 
 
 class LogParserModule(GenericModule):
-    def get_registration(self) -> typing.List[typing.Dict[str, typing.Union[str, callable]]]:
+    def get_registration(self) -> list[dict[str, Union[str, callable]]]:
         return []
 
     def start(self):
@@ -24,18 +24,21 @@ class LogParserModule(GenericModule):
 
 
 class _Pattern:
-    def __init__(self, config: typing.Dict[str, typing.Union[str, callable]]):
+    callback: callable
+    message_regex: re.Pattern[str]
+
+    def __init__(self, config: dict[str, Union[str, callable]]):
         self.program = config.get('program', '')
         self.message_substring = config.get('message_substring', '')
-        self.callback: typing.Union[callable, typing.List[callable]] = config['callback']
+        self.callback = config['callback']
         regex = config.get('message_regex', '')
         self.single_callback = True
 
         if regex:
-            self.message_regex: typing.Pattern[str] = re.compile(regex)
+            self.message_regex = re.compile(regex)
             self.process = self.process_regex
         else:
-            self.message_regex: typing.Pattern[str] = ''
+            self.message_regex = ''
             if self.message_substring:
                 self.process = self.process_substring
             else:
@@ -65,7 +68,7 @@ class _Pattern:
         for cb in self.callback:
             cb(time, program, pid, msg)
 
-    def add_another_callback(self, callback: typing.Callable):
+    def add_another_callback(self, callback: callable):
         # Checking state as originally it was optimized
         if self.single_callback:
             if self.process == self.process_regex:
@@ -81,7 +84,7 @@ class _Pattern:
 
 
 class LogFileDefinition:
-    def __init__(self, directory_list: typing.List[str], file_regex: typing.Union[typing.Pattern[str], str],
+    def __init__(self, directory_list: list[str], file_regex: re.Pattern[str] | str,
                  parser: Parser):
         self.directory_list = directory_list
         self.file_regex = file_regex
@@ -94,9 +97,8 @@ class GenericLogFileDefinition(LogFileDefinition):
 
 
 class LogHandlerModule(Module):
-    """
-    @type modules typing.List[LogParserModule]
-    """
+    _patterns: dict[tuple, _Pattern]
+    modules: list[LogParserModule]
 
     def __init__(self, config: Config, messages: Messages, log_file_definition: LogFileDefinition):
         """
@@ -108,7 +110,7 @@ class LogHandlerModule(Module):
         self.modules = list()
         self._program_parsers = dict()
         self._other_parsers = set()
-        self._patterns: typing.Dict[typing.Tuple, _Pattern] = dict()
+        self._patterns = dict()
 
     def provide(self):
         return 'log'
@@ -174,7 +176,7 @@ class LogHandlerModule(Module):
 
         return [date_file_map[k] for k in sorted(date_file_map.keys())]
 
-    def _process_files(self, files: typing.List[str]):
+    def _process_files(self, files: list[str]):
         start = time.clock()
         cnt = 0
         for fn in files:

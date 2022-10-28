@@ -1,17 +1,16 @@
-# Copyright 2016-2019 Laszlo Attila Toth
+# Copyright 2016-2022 Laszlo Attila Toth
 # Distributed under the terms of the GNU Lesser General Public License v3
 
 import datetime
 import re
 import time
-import typing
 
 
 class Parser:
-    def parse_date(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse_date(self, line: str) -> re.Match[str] | None:
         raise NotImplementedError()
 
-    def parse(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse(self, line: str) -> re.Match[str] | None:
         raise NotImplementedError()
 
 
@@ -32,7 +31,7 @@ class ISO8601Parser(Parser):
             r'^(?P<date>\d+-\d+-\d+)T(?P<time>\d\d:\d\d:\d\d)[-+][0-9]+:[0-9]+'
         )
 
-    def parse_date(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse_date(self, line: str) -> re.Match[str] | None:
         parsed = self._date_time_pattern.match(line)
 
         if not parsed:
@@ -41,7 +40,7 @@ class ISO8601Parser(Parser):
 
         return parsed
 
-    def parse(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse(self, line: str) -> re.Match[str] | None:
         parsed = self._pattern.match(line)
 
         if not parsed:
@@ -70,7 +69,7 @@ class GenericParser(Parser):
             r'^(?P<date>.*)'
         )
 
-    def parse_date(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse_date(self, line: str) -> re.Match[str] | None:
         matched = self._date_time_pattern.match(line)
         if not matched:
             return None
@@ -80,5 +79,5 @@ class GenericParser(Parser):
         d = f'{time_struct.tm_year}-{time_struct.tm_mon:02d}-{time_struct.tm_mday:02d}'
         return self._any_date_time_pattern.match(d)
 
-    def parse(self, line: str) -> typing.Optional[typing.Match[str]]:
+    def parse(self, line: str) -> re.Match[str] | None:
         pass

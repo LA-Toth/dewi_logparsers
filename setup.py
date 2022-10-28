@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
 # DEWI: a developer tool and framework -- Module Framework
-# Copyright (C) 2012-2019  Laszlo Attila Toth
+# Copyright (C) 2012-2022  Laszlo Attila Toth
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
 
 import sys
 
-if sys.hexversion < 0x03060000:
-    raise RuntimeError("Required python version: 3.6 or newer (current: %s)" % sys.version)
+if sys.hexversion < 0x030a0000:
+    raise RuntimeError("Required python version: 3.10 or newer (current: %s)" % sys.version)
 
 try:
     from setuptools import setup, find_packages
@@ -51,9 +51,8 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Software Development',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
@@ -61,7 +60,7 @@ setup(
     ],
     zip_safe=True,
     use_2to3=False,
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     packages=find_packages(exclude=['*test*', 'pylintcheckers']),
     install_requires=[
         'dewi_module_framework>=2.0.1'
