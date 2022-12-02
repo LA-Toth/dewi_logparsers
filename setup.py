@@ -16,17 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import sys
 
 if sys.hexversion < 0x030a0000:
     raise RuntimeError("Required python version: 3.10 or newer (current: %s)" % sys.version)
 
-try:
-    from setuptools import setup, find_packages
-
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     name="dewi_logparsers",
