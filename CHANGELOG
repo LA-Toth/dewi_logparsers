@@ -1,3 +1,6 @@
+2.1.0
+ - use type annotations w/o typing module, requires python 3.10+
+
 2.0.2
 - fix generic log parser to work with macOS and Linux
 
