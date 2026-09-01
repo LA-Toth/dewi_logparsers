@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dewi_logparsers"
+version = "2.1.0"
+description = "DEWI Logparser Module Framework: process / analyze syslog files"
+readme = "README.rst"
+requires-python = ">=3.10"
+license = "LGPL-3.0-only"
+license-files = ["COPYING"]
+keywords = ["tool", "framework", "development", "synchronization"]
+authors = [{name = "Laszlo Attila Toth", email = "python-dewi@laszloattilatoth.me"}]
+maintainers = [{name = "Laszlo Attila Toth", email = "python-dewi@laszloattilatoth.me"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: POSIX",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "dewi_module_framework >=2.0.3, <3",
+]
+
+[project.urls]
+Homepage = "https://github.com/LA-Toth/dewi_logparsers"
+
+[tool.setuptools.packages.find]
+# namespaces = false keeps this equivalent to the setup.py find_packages(),
+# which never picked up directories without an __init__.py.
+namespaces = false
+exclude = ["*test*", "pylintcheckers"]
