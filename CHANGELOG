@@ -1,3 +1,14 @@
+2.1.1
+ - packaging: setup.py replaced by pyproject.toml (PEP 517/518/621), as in
+   the other DEWI repos. use_2to3 is gone -- setuptools has ignored it for
+   years and lib2to3 was removed from Python in 3.13. The sys.hexversion
+   guard is gone too: requires-python enforces the same floor, before
+   anything is downloaded. The license is the SPDX expression per PEP 639
+   with COPYING via license-files.
+ - classifiers extended to Python 3.12-3.14.
+ - the dewi_module_framework requirement gained an upper bound, '<3'.
+ - Makefile uses pytest instead of nosetests
+
 2.1.0
  - use type annotations w/o typing module, requires python 3.10+
 

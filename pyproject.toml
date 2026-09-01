@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dewi_logparsers"
-version = "2.1.0"
+version = "2.1.1"
 description = "DEWI Logparser Module Framework: process / analyze syslog files"
 readme = "README.rst"
 requires-python = ">=3.10"
