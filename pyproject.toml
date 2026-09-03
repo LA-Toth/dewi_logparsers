@@ -34,6 +34,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
+    "dewi_core >=2.0.0, <7",
     "dewi_module_framework >=2.0.3, <3",
 ]
 
