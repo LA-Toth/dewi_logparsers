@@ -12,10 +12,13 @@ help:
 .PHONY: check
 check: cs tests
 
+# This package has no tests of its own yet. pytest exits with 5 when it
+# collects nothing, which is not a failure -- and the day a test is added it
+# is picked up without touching this.
 .PHONY: tests
 tests:
 	@echo Running Python unit tests
-	$(NOSE) -s $(NOSE_TEST_PATHS)
+	$(PYTEST) $(TEST_PATHS) || [ $$? -eq 5 ]
 
 .PHONY: cs
 cs: pylint pep8
